@@ -32,7 +32,7 @@ public class Main {
     public static void businessLogin(EntityManager manager) {
         String id = "id1";
 
-        // µî·Ï
+        // ë“±ë¡
         Member member = new Member();
         member.setId(id);
         member.setUsername("Doqi Kim");
@@ -40,18 +40,18 @@ public class Main {
 
         manager.persist(member);
 
-        // ¼öÁ¤
+        // ìˆ˜ì •
         member.setAge(99);
 
-        // ÇÑ°Ç Á¶È¸
+        // í•œê±´ ì¡°íšŒ
         Member findMember = manager.find(Member.class, id);
         System.out.println("findMember : " + findMember);
 
-        // ¸ñ·Ï Á¶È¸
+        // ë¦¬ìŠ¤íŠ¸ ì¡°íšŒ
         List<Member> members = manager.createQuery("select m from Member m", Member.class).getResultList();
         System.out.println("members : " + members);
 
-        // »èÁ¦
+        // ì‚­ì œ
         manager.remove(member);
 
     }
