@@ -1,5 +1,6 @@
 package org.ohjic.jpa.app;
 
+import org.ohjic.jpa.model.Board;
 import org.ohjic.jpa.model.Member;
 
 import javax.persistence.EntityManager;
@@ -19,7 +20,8 @@ public class Main {
 
         try {
             tx.begin();
-            businessLogin(em);
+            businessLogicForMember(em);
+            businessLogicForBoard(em);
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
@@ -29,7 +31,7 @@ public class Main {
         emf.close();
     }
 
-    public static void businessLogin(EntityManager manager) {
+    public static void businessLogicForMember(EntityManager manager) {
         String id = "id1";
 
         // 등록
@@ -53,6 +55,11 @@ public class Main {
 
         // 삭제
         manager.remove(member);
+    }
 
+    public static void businessLogicForBoard(EntityManager em){
+        Board board = new Board();
+        em.persist(board);
+        System.out.println(board);
     }
 }
