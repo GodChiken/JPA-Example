@@ -7,6 +7,7 @@ import lombok.extern.apachecommons.CommonsLog;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -17,11 +18,18 @@ import java.util.List;
 @NoArgsConstructor
 @Entity(name = "manyToManyMember")
 public class Member {
-    @Id
+    @Id @Column(name = "memberId")
     private String id;
     private String name;
 
     @ManyToMany
-    @JoinTable(name = "memberProduct")
-    private List<Product> productList = new ArrayList<>();
+    @JoinTable(name = "memberProduct", joinColumns = @JoinColumn(name = "memberId"), inverseJoinColumns = @JoinColumn(name = "productId"))
+    private List<Product> products = new ArrayList<>();
+
+    public void addProduct(Product product){
+        if(products.contains(product) == false){
+            products.add(product);
+            product.getMembers().add(this);
+        }
+    }
 }
