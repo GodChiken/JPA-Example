@@ -1,13 +1,9 @@
 package jpa.app;
 
-import org.ohjic.jpa.model.Member;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by Kim Donghoon on 2015-11-09.
@@ -20,12 +16,7 @@ public class Main {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
 
-        List<Integer> idList = Arrays.asList(1,2,3,4,5);
-        for(Integer id : idList){
-            Member member = new Member();
-            member.setCity("korea");
-            em.persist(member);
-        }
+
 
         tx.commit();
         em.close();

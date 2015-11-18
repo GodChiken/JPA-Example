@@ -11,14 +11,16 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class OrderItem {
+public class Delivery {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@ManyToOne
-	private Item item;
-	@ManyToOne
-	private Orders orders;
-	private int orderPrice;
-	private int count;
+	@OneToOne(mappedBy = "delivery")
+	private Orders order;
+	private String city;
+	private String street;
+	private String zipcode;
+	@Enumerated(EnumType.STRING)
+	private DeliveryStatus status;
 }

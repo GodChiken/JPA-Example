@@ -1,21 +1,27 @@
 package jpa.model;
 
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * Created by Kim Donghoon on 2015-11-09.
- */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Item {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    private int price;
-    private int stockQuantity;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String name;
+	private int price;
+	private int stockQuantity;
+	@ManyToMany(mappedBy = "items")
+	private List<Category> categories = new ArrayList<>();
+
 }

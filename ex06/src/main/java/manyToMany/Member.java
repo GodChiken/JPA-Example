@@ -23,7 +23,7 @@ public class Member {
     private String name;
 
     @ManyToMany
-    @JoinTable(name = "memberProduct", joinColumns = @JoinColumn(name = "memberId"), inverseJoinColumns = @JoinColumn(name = "productId"))
+    @JoinTable(name = "mayToManyMemberProduct", joinColumns = @JoinColumn(name = "memberId"), inverseJoinColumns = @JoinColumn(name = "productId"))
     private List<Product> products = new ArrayList<>();
 
     public void addProduct(Product product){
