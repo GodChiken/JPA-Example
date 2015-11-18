@@ -1,4 +1,4 @@
-package org.ohjic.jpa.app;
+package jpa.app;
 
 import org.ohjic.jpa.model.Member;
 

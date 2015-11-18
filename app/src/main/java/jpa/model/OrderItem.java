@@ -1,10 +1,8 @@
-package org.ohjic.jpa.model;
+package jpa.model;
 
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Kim Donghoon on 2015-11-09.

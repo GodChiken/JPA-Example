@@ -1,4 +1,4 @@
-package org.ohjic.jpa.model;
+package jpa.model;
 
 import lombok.Data;
 
