@@ -12,6 +12,7 @@
         <module>ex06</module>
         <module>ex05</module>
         <module>app</module>
+        <module>ex07</module>
     </modules>
 
     <dependencies>
