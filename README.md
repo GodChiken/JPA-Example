@@ -29,3 +29,9 @@ JPA 프로그래밍 책을 기반 예제 정리 프로젝트
 2015년 11월 21일
 - 상속 매핑 (joined table, single table, table per class)
 - mapped superclass
+
+2015년 11월 22일
+- identifying, non-identifying
+- multi key
+- idClass, embeddedId
+- one-to-one identifying
