@@ -13,17 +13,21 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Member {
+@AttributeOverrides({
+        @AttributeOverride(name = "createdDate", column = @Column(name = "regiDate")),
+        @AttributeOverride(name = "lastModifiedDate", column = @Column(name = "lastUpdateDate"))
+})
+public class Member extends BaseEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	private String name;
-	private String city;
-	private String street;
-	private String zipcode;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String name;
+    private String city;
+    private String street;
+    private String zipcode;
 
-	@OneToMany(mappedBy = "member")
-	private List<Orders> orders = new ArrayList<>();
+    @OneToMany(mappedBy = "member")
+    private List<Orders> orders = new ArrayList<>();
 
 }
