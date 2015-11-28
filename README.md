@@ -48,3 +48,10 @@ JPA 프로그래밍 책을 기반 예제 정리 프로젝트
 -  remove
 - 고아객체 (orphan)
 - 실전예제
+
+2015년 11월 28일
+- Embeddable, Embedded
+- AttributeOverride
+- immutable
+- ElementCollection, CollectionTable
+- 실전예제
