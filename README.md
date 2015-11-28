@@ -44,7 +44,7 @@ JPA 프로그래밍 책을 기반 예제 정리 프로젝트
 
 2015년 11월 28일
 - 영속성 전이
--- persist
--- remove
+-  persist
+-  remove
 - 고아객체 (orphan)
 - 실전예제
