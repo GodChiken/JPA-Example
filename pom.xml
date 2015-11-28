@@ -14,6 +14,7 @@
         <module>app</module>
         <module>ex07</module>
         <module>ex08</module>
+        <module>ex09</module>
     </modules>
 
     <dependencies>

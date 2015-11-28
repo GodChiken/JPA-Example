@@ -13,14 +13,13 @@ import javax.persistence.*;
 @Entity
 public class Delivery {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	@OneToOne(mappedBy = "delivery")
-	private Orders order;
-	private String city;
-	private String street;
-	private String zipcode;
-	@Enumerated(EnumType.STRING)
-	private DeliveryStatus status;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @OneToOne(mappedBy = "delivery")
+    private Orders order;
+    @Embedded
+    private Address address;
+    @Enumerated(EnumType.STRING)
+    private DeliveryStatus status;
 }
