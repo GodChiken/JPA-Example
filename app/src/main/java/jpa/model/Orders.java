@@ -18,11 +18,11 @@ public class Orders extends BaseEntity {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Member member;
-	@OneToMany(mappedBy = "orders")
+	@OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
 	private List<OrderItem> orderItems = new ArrayList<>();
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Delivery delivery;
 	private Date orderDate;
 	@Enumerated(EnumType.STRING)
