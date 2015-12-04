@@ -55,3 +55,10 @@ JPA 프로그래밍 책을 기반 예제 정리 프로젝트
 - immutable
 - ElementCollection, CollectionTable
 - 실전예제
+
+### 2015년 12월 1일
+- JPQL
+- Criteria
+- QueryDSL
+- Native SQL
+- get JDBC connection
