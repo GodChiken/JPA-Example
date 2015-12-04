@@ -49,17 +49,6 @@ JPA 프로그래밍 책을 기반 예제 정리 프로젝트
 - 고아객체 (orphan)
 - 실전예제
 
-### 2015년 12월 4일
-- 초기 데이터 세팅 (META-INF/import.sql 파일 classes 안으로 옮겨야함)
-- Query, TypedQuery
-- Parameter binding
-- Projection
-- Entity
-- Embedded
-- Scala
-- Select muliple column
-- New keyword
-
 ### 2015년 11월 28일
 - Embeddable, Embedded
 - AttributeOverride
@@ -73,3 +62,14 @@ JPA 프로그래밍 책을 기반 예제 정리 프로젝트
 - QueryDSL
 - Native SQL
 - get JDBC connection
+
+### 2015년 12월 4일
+- 초기 데이터 세팅 (META-INF/import.sql 파일 classes 안으로 옮겨야함)
+- Query, TypedQuery
+- Parameter binding
+- Projection
+- Entity
+- Embedded
+- Scala
+- Select muliple column
+- New keyword
