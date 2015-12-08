@@ -1,5 +1,6 @@
 package jpqlTest.app;
 
+import com.sun.xml.internal.bind.v2.runtime.output.SAXOutput;
 import jpqlTest.model.Address;
 import jpqlTest.model.Member;
 import jpqlTest.model.Team;
@@ -8,6 +9,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -28,11 +31,90 @@ public class Main {
         //embeddedTypeProjection(em);
         //scalaTypeProjection(em);
         //selectMultiValue(em);
-        newKeyword(em);
+        //newKeyword(em);
+        //paging(em);
+        //setAndOrdering(em);
+        join(em);
 
         tx.commit();
         em.close();
         emf.close();
+    }
+
+    public static void join(EntityManager em) {
+        System.out.println("\ninner join example");
+        TypedQuery<Member> query = em.createQuery("select m from jpqlTestMember m join m.team t where t.name = :teamName", Member.class);
+        System.out.println(
+                query.setParameter("teamName", "개발 1팀").getResultList()
+        );
+
+        System.out.println("\nselect multiple object using inner join example");
+        List<Object[]> result = em.createQuery("select m,t from jpqlTestMember m join m.team t where t.name = :teamName")
+                .setParameter("teamName", "개발 1팀")
+                .getResultList();
+        result.stream()
+                .forEach(row -> System.out.println((Member) row[0] + " // " + (Team) row[1]));
+
+        System.out.println("\nouter join example");
+        query = em.createQuery("select m from jpqlTestMember m left join m.team t", Member.class);
+        System.out.println(
+                query.getResultList()
+        );
+
+        System.out.println("\ncollection join example");
+        TypedQuery<Team> queryTeam = em.createQuery("select t from jpqlTestTeam t left join t.members m", Team.class);
+        queryTeam.getResultList().stream()
+                .forEach(
+                        team -> System.out.println(team + " -> " + team.getMembers())
+                );
+
+    }
+
+    public static void setAndOrdering(EntityManager em) {
+        System.out.println("\nstatistic example");
+        List<Object[]> result = em.createQuery("select count(m), sum(m.age), avg(m.age), max(m.age), min(m.age) from jpqlTestMember m").getResultList();
+        result.stream()
+                .forEach(
+                        row -> Arrays.asList(row).stream()
+                                .forEach(column -> System.out.println(column))
+                );
+
+        System.out.println("\ngroup by example");
+        result = em.createQuery("select t.name, count(m), sum(m.age), avg(m.age), max(m.age), min(m.age) from jpqlTestMember m " +
+                "left join m.team t group by t.name").getResultList();
+        result.stream()
+                .forEach(
+                        row -> Arrays.asList(row).stream()
+                                .forEach(column -> System.out.println(column))
+                );
+
+        System.out.println("\nhaving example");
+        result = em.createQuery("select t.name, count(m), sum(m.age), avg(m.age), max(m.age), min(m.age) from jpqlTestMember m " +
+                "left join m.team t group by t.name having avg(m.age) > 30").getResultList();
+        result.stream()
+                .forEach(
+                        row -> Arrays.asList(row).stream()
+                                .forEach(column -> System.out.println(column))
+                );
+
+        System.out.println("\norder by example");
+        result = em.createQuery("select t.name, count(m.age) as cnt from jpqlTestMember m left join m.team t group by t.name order by cnt").getResultList();
+        result.stream()
+                .forEach(
+                        row -> Arrays.asList(row).stream()
+                                .forEach(column -> System.out.println(column))
+                );
+
+    }
+
+    public static void paging(EntityManager em) {
+        TypedQuery<Member> query = em.createQuery("select m from jpqlTestMember m where team.id = :teamId order by m.id asc", Member.class);
+        query.setParameter("teamId", 1L);
+        query.setFirstResult(2);
+        query.setMaxResults(1);
+        System.out.println(
+                query.getResultList()
+        );
     }
 
     public static void newKeyword(EntityManager em) {
