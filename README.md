@@ -73,3 +73,13 @@ JPA 프로그래밍 책을 기반 예제 정리 프로젝트
 - Scala
 - Select muliple column
 - New keyword
+
+### 2015년 12월 8일
+- paging API
+- set and ordering
+- group by, having
+- order by
+- join
+- inner join
+- outer join
+- collection join
