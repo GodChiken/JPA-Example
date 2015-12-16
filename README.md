@@ -93,8 +93,8 @@ JPA 프로그래밍 책을 기반 예제 정리 프로젝트
 - theta join
 - join on
 - fetch join
--- entity fetch join
--- collection fetch join
--- distinct in collection fetch join
--- difference fetch join and normal join
+- entity fetch join
+- collection fetch join
+- distinct in collection fetch join
+- difference fetch join and normal join
 - path expression
