@@ -2,6 +2,11 @@
 
 JPA 프로그래밍 책을 기반 예제 정리 프로젝트
 
+## JPA를 공부하면서 느낀 장점
+1. 객체 - 테이블 매핑이 가능. 개발자는 객체만 보고 프로그래밍이 가능하다.
+2. 동일 데이터를 로딩할때 퍼시스턴스 컨테이너에서 꺼내온다. (1차 캐시)
+3. global lazy fetch 전략을 사용하면 복잡하지 않은 로직을 직접 작성하지 않고 퍼포먼스의 이점을 취할수 있다.
+
 ### 2015년 11월 8일
 - JPA + MariaDB 를 사용하여 예제 구현
 
@@ -83,3 +88,13 @@ JPA 프로그래밍 책을 기반 예제 정리 프로젝트
 - inner join
 - outer join
 - collection join
+
+### 2015년 12월 16일
+- theta join
+- join on
+- fetch join
+-- entity fetch join
+-- collection fetch join
+-- distinct in collection fetch join
+-- difference fetch join and normal join
+- path expression
