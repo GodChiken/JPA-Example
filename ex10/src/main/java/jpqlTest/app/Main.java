@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.temporal.TemporalAmount;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -34,11 +35,57 @@ public class Main {
         //newKeyword(em);
         //paging(em);
         //setAndOrdering(em);
-        join(em);
+        //join(em);
+        //fetchJoin(em);
+        pathExpression(em);
 
         tx.commit();
         em.close();
         emf.close();
+    }
+
+    public static void pathExpression(EntityManager em) {
+        List<Object> result = em.createQuery("select t.members.size from jpqlTestTeam t").getResultList();
+        result.stream()
+                .forEach(
+                        row -> Arrays.asList(row).stream()
+                                .forEach(column -> System.out.println(column))
+                );
+
+
+        TypedQuery<Member> query = em.createQuery("select o.member from jpqlTestOrder o", Member.class);
+        System.out.println(query.getResultList());
+
+        TypedQuery<Team> teamQuery = em.createQuery("select o.member.team from jpqlTestOrder o where o.product.name = '마우스'", Team.class);
+        System.out.println(teamQuery.getResultList());
+    }
+
+    // 영속성 컨테이너의 영향으로 각 fetch join 테스트는 따로따로 수행해야함.
+    public static void fetchJoin(EntityManager em) {
+        System.out.println("\nDistinct Normal Collection fetch join");
+        TypedQuery<Team> teamQuery = em.createQuery("select distinct t from jpqlTestTeam t join fetch t.members", Team.class);
+        teamQuery.getResultList().stream()
+                .forEach(team -> System.out.println(team));
+
+        System.out.println("\nNormal Collection fetch join");
+        teamQuery = em.createQuery("select t from jpqlTestTeam t join t.members", Team.class);
+        teamQuery.getResultList().stream()
+                .forEach(team -> System.out.println(team));
+
+        System.out.println("\nCollection fetch join");
+        teamQuery = em.createQuery("select t from jpqlTestTeam t join fetch t.members", Team.class);
+        teamQuery.getResultList().stream()
+                .forEach(team -> System.out.println(team));
+
+        System.out.println("\nnormal join");
+        TypedQuery<Member> query = em.createQuery("select m from jpqlTestMember m join m.team", Member.class);
+        query.getResultList().stream()
+                .forEach(member -> System.out.println(member));
+
+        System.out.println("\njoin fetch");
+        query = em.createQuery("select m from jpqlTestMember m join fetch m.team", Member.class);
+        query.getResultList().stream()
+                .forEach(member -> System.out.println(member));
     }
 
     public static void join(EntityManager em) {
@@ -68,6 +115,14 @@ public class Main {
                         team -> System.out.println(team + " -> " + team.getMembers())
                 );
 
+        System.out.println("\ntheta join example");
+        result = em.createQuery("select count(m) from jpqlTestMember m, jpqlTestTeam t where m.name = t.name").getResultList();
+        System.out.println(result);
+
+        System.out.println("\njoin on example");
+        query = em.createQuery("select m from jpqlTestMember m join m.team t on t.name = '기획디자인팀'", Member.class);
+        query.getResultList().stream()
+                .forEach(member -> System.out.println(member));
     }
 
     public static void setAndOrdering(EntityManager em) {
