@@ -98,3 +98,14 @@ JPA 프로그래밍 책을 기반 예제 정리 프로젝트
 - distinct in collection fetch join
 - difference fetch join and normal join
 - path expression
+
+### 2015년 12월 26일
+- sub query
+- sub query function (all, any, some)
+- condition expression
+- in, like
+- collection expression (empty, is null, scala, case(coalesce vs isnull), nullif
+- polymorphism query (type(), treat())
+- custom function
+- using direct entity
+- named query (annotation, xml)
