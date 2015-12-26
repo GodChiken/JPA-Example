@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm" version="2.1">
+    <named-query name="Member.xmlFindByName">
+        <query>
+            select m from jpqlTestMember m where m.name = :name
+        </query>
+    </named-query>
+    <named-query name="Member.xmlCount">
+        <query>
+            select count(m) from jpqlTestMember m
+        </query>
+    </named-query>
+</entity-mappings>

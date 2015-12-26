@@ -1,14 +1,13 @@
 package jpqlTest.app;
 
 import com.sun.xml.internal.bind.v2.runtime.output.SAXOutput;
-import jpqlTest.model.Address;
-import jpqlTest.model.Member;
-import jpqlTest.model.Team;
+import jpqlTest.model.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.persistence.metamodel.Type;
 import java.time.temporal.TemporalAmount;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,11 +36,193 @@ public class Main {
         //setAndOrdering(em);
         //join(em);
         //fetchJoin(em);
-        pathExpression(em);
+        //pathExpression(em);
+        //subQuery(em);
+        //existsAllAnySomeInt(em);
+        //betweenInLikeNull(em);
+        //collectionExpression(em);
+        //scalaExpression(em);
+        //caseExpression(em);
+        //polymorphismQuery(em);
+        //customFunction(em);
+        //usingDirectEntity(em);
+        namedQuery(em);
 
         tx.commit();
         em.close();
         emf.close();
+    }
+
+    public static void namedQuery(EntityManager em) {
+        System.out.println(
+                em.createNamedQuery("Member.findByName", Member.class)
+                        .setParameter("name", "김동훈")
+                        .getResultList()
+        );
+        System.out.println(
+                em.createNamedQuery("Member.count", Long.class)
+                        .getSingleResult()
+        );
+
+        System.out.println(
+                em.createNamedQuery("Member.xmlFindByName", Member.class)
+                        .setParameter("name", "김동훈")
+                        .getResultList()
+        );
+        System.out.println(
+                em.createNamedQuery("Member.xmlCount", Long.class)
+                        .getSingleResult()
+        );
+    }
+
+    public static void usingDirectEntity(EntityManager em) {
+        System.out.println(
+                (Long) em.createQuery("select count(m) from jpqlTestMember m").getSingleResult()
+        );
+
+        System.out.println(
+                (Long) em.createQuery("select count(m.id) from jpqlTestMember m").getSingleResult()
+        );
+
+
+        Member member = em.find(Member.class, 1L);
+        System.out.println(
+                em.createQuery("select m from jpqlTestMember m where m = :member", Member.class)
+                        .setParameter("member", member)
+                        .getSingleResult()
+        );
+
+        System.out.println(
+                em.createQuery("select m from jpqlTestMember m where m.id = 1", Member.class)
+                        .getSingleResult()
+        );
+
+
+        Team team = em.find(Team.class, 1L);
+        System.out.println(
+                em.createQuery("select m from jpqlTestMember m where m.team = :team")
+                        .setParameter("team", team)
+                        .getResultList()
+        );
+
+        System.out.println(
+                em.createQuery("select m from jpqlTestMember m where m.team.id = 1")
+                        .getResultList()
+        );
+    }
+
+    public static void customFunction(EntityManager em) {
+        String result = (String) em.createQuery("select get_a() from jpqlTestItem i").getSingleResult();
+        System.out.println(result);
+    }
+
+    public static void polymorphismQuery(EntityManager em) {
+        List<Item> resultList = em.createQuery("select i from jpqlTestItem i", Item.class).getResultList();
+        System.out.println(resultList);
+
+        resultList = em.createQuery("select i from jpqlTestItem i where type(i) in (Book)").getResultList();
+        System.out.println(resultList);
+
+
+        resultList = em.createQuery("select i from jpqlTestItem i where i.author = '김동훈'").getResultList();
+        System.out.println(resultList);
+        resultList = em.createQuery("select i from jpqlTestItem i where treat(i as Book).author = '김동훈'").getResultList();
+        System.out.println(resultList);
+    }
+
+    public static void caseExpression(EntityManager em) {
+        List<Object> resultList = em.createQuery("select case when m.age <= 20 then '20미만' when m.age <= 30 then '30미만' else '기타' end from jpqlTestMember m").getResultList();
+        resultList.stream().forEach(row -> {
+            System.out.println(row);
+        });
+
+        resultList = em.createQuery("select case m.age when 20 then '20' when 30 then '30' else '?' end from jpqlTestMember m").getResultList();
+        resultList.stream().forEach(row -> {
+            System.out.println(row);
+        });
+
+        resultList = em.createQuery("select coalesce(m.name, '이름없는 회원') from jpqlTestMember m").getResultList();
+        resultList.stream().forEach(row -> {
+            System.out.println(row);
+        });
+
+        resultList = em.createQuery("select nullif(m.name, '김동훈') from jpqlTestMember m").getResultList();
+        resultList.stream().forEach(row -> {
+            System.out.println(row);
+        });
+    }
+
+    public static void scalaExpression(EntityManager em) {
+        List<Object[]> resultList = em.createQuery("select current_time , current_date , current_timestamp from jpqlTestTeam t").getResultList();
+        resultList.stream().forEach(row -> {
+            Arrays.asList(row).stream()
+                    .forEach(column -> System.out.println(column));
+        });
+
+        resultList = em.createQuery("select year(current_timestamp), month(current_timestamp), day(current_timestamp) from jpqlTestTeam t").getResultList();
+        resultList.stream().forEach(row -> {
+            Arrays.asList(row).stream()
+                    .forEach(column -> System.out.println(column));
+        });
+    }
+
+    public static void collectionExpression(EntityManager em) {
+        TypedQuery<Member> memberQuery = em.createQuery("select m from jpqlTestMember m where m.orders is not empty", Member.class);
+        memberQuery.getResultList().stream()
+                .forEach(member -> System.out.println(member));
+
+        Member member = memberQuery.getResultList().get(0);
+        TypedQuery<Team> teamQuery = em.createQuery("select t from jpqlTestTeam t where :memberParam member of t.members", Team.class);
+        teamQuery.setParameter("memberParam", member);
+        teamQuery.getResultList().stream()
+                .forEach(team -> System.out.println(team));
+    }
+
+    public static void betweenInLikeNull(EntityManager em) {
+        TypedQuery<Member> memberQuery = em.createQuery("select m from jpqlTestMember m where m.age between 29 and 31", Member.class);
+        memberQuery.getResultList().stream()
+                .forEach(member -> System.out.println(member));
+
+        memberQuery = em.createQuery("select m from jpqlTestMember m where m.name in ('김동훈','정현일')", Member.class);
+        memberQuery.getResultList().stream()
+                .forEach(member -> System.out.println(member));
+
+        memberQuery = em.createQuery("select m from jpqlTestMember m where m.name is null", Member.class);
+        memberQuery.getResultList().stream()
+                .forEach(member -> System.out.println(member));
+    }
+
+    public static void existsAllAnySomeInt(EntityManager em) {
+        TypedQuery<Member> memberQuery = em.createQuery("select m from jpqlTestMember m where exists (select t from m.team t where t.name = '개발 2팀')", Member.class);
+        memberQuery.getResultList().stream()
+                .forEach(member -> System.out.println(member));
+
+        TypedQuery<Order> orderQuery = em.createQuery("select o from jpqlTestOrder o where o.orderAmount > ALL (select p.stockAmount from jpqlTestProduct p)", Order.class);
+        orderQuery.getResultList().stream()
+                .forEach(order -> System.out.println(order));
+
+        memberQuery = em.createQuery("select m from jpqlTestMember m where m.team = ANY (select t from jpqlTestTeam t)", Member.class);
+        memberQuery.getResultList().stream()
+                .forEach(member -> System.out.println(member));
+
+        TypedQuery<Team> teamQuery = em.createQuery("select t from jpqlTestTeam t where t IN (select t2 from jpqlTestTeam t2 join t2.members m2 where m2.age >= 30)", Team.class);
+        teamQuery.getResultList().stream()
+                .forEach(team -> System.out.println(team));
+    }
+
+
+    public static void subQuery(EntityManager em) {
+        TypedQuery<Member> memberQuery = em.createQuery("select m from jpqlTestMember m where m.age > (select avg(m2.age) from jpqlTestMember m2)", Member.class);
+        memberQuery.getResultList().stream()
+                .forEach(member -> System.out.println(member));
+
+        memberQuery = em.createQuery("select m from jpqlTestMember m where (select count(0) from jpqlTestOrder o where m = o.member)>0", Member.class);
+        memberQuery.getResultList().stream()
+                .forEach(member -> System.out.println(member));
+
+        memberQuery = em.createQuery("select m from jpqlTestMember m where m.orders.size > 0", Member.class);
+        memberQuery.getResultList().stream()
+                .forEach(member -> System.out.println(member));
     }
 
     public static void pathExpression(EntityManager em) {

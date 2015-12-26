@@ -26,3 +26,8 @@ INSERT INTO `jpql_test_member` (`id`, `age`, `name`, `team_id`) VALUES (16, 25, 
 
 INSERT INTO `jpql_test_order` (`id`, `city`, `street`, `zipcode`, `order_amount`, `member_id`, `product_id`) VALUES (1, '서울', '가산로', '123123', 30, 1, 1);
 INSERT INTO `jpql_test_order` (`id`, `city`, `street`, `zipcode`, `order_amount`, `member_id`, `product_id`) VALUES (2, '경기', '하안로', '123444', 10, 1, 2);
+
+INSERT INTO `jpql_test_item` (`type`, `id`, `name`, `author`) VALUES ('B', 1, '첫번째 아이템', '김동훈');
+INSERT INTO `jpql_test_item` (`type`, `id`, `name`, `author`) VALUES ('B', 2, '두번째 아이템', '김동훈2');
+INSERT INTO `jpql_test_item` (`type`, `id`, `name`, `author`) VALUES ('A', 3, '세번째 아이템', NULL);
+INSERT INTO `jpql_test_item` (`type`, `id`, `name`, `author`) VALUES ('A', 4, '네번째 아이템', '김동훈');

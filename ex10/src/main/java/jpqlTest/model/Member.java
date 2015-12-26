@@ -14,6 +14,11 @@ import java.util.List;
 @NoArgsConstructor
 @ToString(exclude = "orders")
 @Entity(name = "jpqlTestMember")
+@NamedQueries({
+        @NamedQuery(name = "Member.findByName", query = "select m from jpqlTestMember m where m.name = :name"),
+        @NamedQuery(name = "Member.count", query = "select count(m) from jpqlTestMember m")
+})
+
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
