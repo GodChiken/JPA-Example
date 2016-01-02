@@ -1,4 +1,4 @@
-package jpqlTest.model;
+package oopQueryModel;
 
 import lombok.Data;
 

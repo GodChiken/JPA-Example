@@ -1,15 +1,11 @@
 package jpqlTest.app;
 
-import com.sun.xml.internal.bind.v2.runtime.output.SAXOutput;
-import jpqlTest.model.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import oopQueryModel.*;
 
 import javax.persistence.*;
-import javax.persistence.metamodel.Type;
-import java.time.temporal.TemporalAmount;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
