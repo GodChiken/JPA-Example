@@ -6,6 +6,7 @@ JPA 프로그래밍 책을 기반 예제 정리 프로젝트
 1. 객체 - 테이블 매핑이 가능. 개발자는 객체만 보고 프로그래밍이 가능하다.
 2. 동일 데이터를 로딩할때 퍼시스턴스 컨테이너에서 꺼내온다. (1차 캐시)
 3. global lazy fetch 전략을 사용하면 복잡하지 않은 로직을 직접 작성하지 않고 퍼포먼스의 이점을 취할수 있다.
+3-1. fetch join을 직접 구현하지 않아도 된다는 점이 아주 마음에 든다.  
 4. 이건 SQL 공부에 도움이 된건데, coalesce, all, any, some 의 사용법을 알게되었다.
 5. 상속과 폼되는 객체에 대한 객체와 테이블 설계 매핑되어 테이블 종속적 개발에서 벗어날 수 있다. 이제 클래스 설계할 때 테이블 구조에서 어느정도 자유로워졌다.
 6. 왠지 타이핑 칠게 많아진 것 같다..
@@ -112,3 +113,11 @@ JPA 프로그래밍 책을 기반 예제 정리 프로젝트
 - custom function
 - using direct entity
 - named query (annotation, xml)
+
+### 2016년 1월 2일
+
+- import 세팅... s 하나 빠진 것이 문제였음.
+- QueryDSL 설정
+- start
+- create basic Q
+- search condition query
