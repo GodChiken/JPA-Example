@@ -1,6 +1,9 @@
 # JPA_TEST
 
-JPA 프로그래밍 책을 기반 예제 정리 프로젝트
+JPA 프로그래밍 책을 기반 예제 정리 프로젝트.
+모든 예제는 다음의 환경에 최적화되어있습니다.
+JDK 1.8.0_60
+MariaDB 10.1.8
 
 ## JPA를 공부하면서 느낀점
 1. 객체 - 테이블 매핑이 가능. 개발자는 객체만 보고 프로그래밍이 가능하다.
@@ -123,7 +126,7 @@ JPA 프로그래밍 책을 기반 예제 정리 프로젝트
 - create basic Q
 - search condition query
 
-### 2016년 1월 10일
+### 2016년 1월 9일
 
 - 결과 조회
 - paging & ordering
@@ -132,3 +135,15 @@ JPA 프로그래밍 책을 기반 예제 정리 프로젝트
 - sub query
 - projection
 - distinct
+
+### 2016년 1월 10일
+
+[QueryDSL]
+- update, remove batch
+- dynamic query
+- method delegation
+
+[Native SQL]
+- inquiry entity
+- inquiry value
+- inquiry entity + value (SqlResultSetMapping)
