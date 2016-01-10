@@ -122,3 +122,13 @@ JPA 프로그래밍 책을 기반 예제 정리 프로젝트
 - start
 - create basic Q
 - search condition query
+
+### 2016년 1월 10일
+
+- 결과 조회
+- paging & ordering
+- grouping
+- joining
+- sub query
+- projection
+- distinct
