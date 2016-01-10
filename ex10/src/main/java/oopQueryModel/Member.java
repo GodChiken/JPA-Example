@@ -18,7 +18,10 @@ import java.util.List;
         @NamedQuery(name = "Member.findByName", query = "select m from jpqlTestMember m where m.name = :name"),
         @NamedQuery(name = "Member.count", query = "select count(m) from jpqlTestMember m")
 })
-
+@SqlResultSetMapping(name = "memberWithOrderCount",
+        entities = {@EntityResult(entityClass = Member.class)},
+        columns = {@ColumnResult(name = "order_count"),
+                @ColumnResult(name = "price_sum")})
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

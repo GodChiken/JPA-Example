@@ -1,15 +1,21 @@
 package querydsl.app;
 
+import com.mysema.query.BooleanBuilder;
 import com.mysema.query.QueryModifiers;
 import com.mysema.query.SearchResults;
 import com.mysema.query.jpa.JPASubQuery;
+import com.mysema.query.jpa.impl.JPADeleteClause;
 import com.mysema.query.jpa.impl.JPAQuery;
+import com.mysema.query.jpa.impl.JPAUpdateClause;
 import com.mysema.query.types.Projections;
 import com.mysema.query.types.expr.BooleanExpression;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import oopQueryModel.*;
+import oopQueryModel.Member;
+import oopQueryModel.Product;
+import oopQueryModel.QMember;
+import oopQueryModel.QProduct;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -17,7 +23,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.util.List;
 
-import static oopQueryModel.QMember.*;
+import static oopQueryModel.QMember.member;
 import static oopQueryModel.QOrder.order;
 import static oopQueryModel.QProduct.product;
 
@@ -39,12 +45,48 @@ public class Main {
         //joining(em);
         //subQuery(em);
         //projection(em);
-        distinct(em);
+        //distinct(em);
+        //batchQuery(em);
+        //dynamicQuery(em);
+        queryDelegating(em);
 
         tx.commit();
         em.close();
         emf.close();
 
+    }
+
+    public static void queryDelegating(EntityManager em) {
+        new JPAQuery(em).from(product)
+                .where(product.isExpression(300))
+                .list(product);
+
+        new JPAQuery(em).from(member)
+                .where(member.helloStart())
+                .list(member);
+
+    }
+
+    public static void dynamicQuery(EntityManager em) {
+        String name = "찾고자 하는 상품 이름";
+        int price = 1000;
+
+        BooleanBuilder builder = new BooleanBuilder();
+        builder.and(product.name.contains(name));
+        builder.and(product.price.gt(price));
+
+        new JPAQuery(em).from(product)
+                .where(builder)
+                .list(product);
+    }
+
+    public static void batchQuery(EntityManager em) {
+        new JPAUpdateClause(em, product).where(product.name.eq("업데이트 할 상품 이름"))
+                .set(product.price, product.price.add(100))
+                .execute();
+
+        new JPADeleteClause(em, product).where(product.name.eq("삭제 할 상품 이름"))
+                .execute();
     }
 
     public static void distinct(EntityManager em) {
