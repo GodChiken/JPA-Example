@@ -15,6 +15,7 @@ MariaDB 10.1.8
 5. 상속과 폼되는 객체에 대한 객체와 테이블 설계 매핑되어 테이블 종속적 개발에서 벗어날 수 있다. 이제 클래스 설계할 때 테이블 구조에서 어느정도 자유로워졌다.
 6. 왠지 타이핑 칠게 많아진 것 같다..
 7. IntelliJ에서 static import 단축키 -> ctrl+alt+space, alt+enter -> import statically 선택
+8. find() 는 1차 캐쉬 먼저 조회 후 디비 조회 // JPQL은 디비 먼저 조회후 1차 캐쉬 검사
 
 ### 2015년 11월 8일
 - JPA + MariaDB 를 사용하여 예제 구현
