@@ -10,4 +10,25 @@
             select count(m) from jpqlTestMember m
         </query>
     </named-query>
+
+
+    <named-native-query name="Member.memberWithOrderCountXml" result-set-mapping="memberWithOrderCountResultMap">
+        <query>
+            select jpql_test_member.*, sum(price) price_sum, count(0) order_count from jpql_test_member
+            left join jpql_test_order on jpql_test_member.id = jpql_test_order.member_id
+            left join jpql_test_product on jpql_test_order.product_id = jpql_test_product.id
+            group by jpql_test_member.id
+        </query>
+    </named-native-query>
+
+    <named-stored-procedure-query name="multiply_xml" procedure-name="proc_multiply">
+        <parameter class="java.lang.Integer" mode="INOUT" name="inParam"></parameter>
+        <parameter class="java.lang.Integer" mode="INOUT" name="outParam"></parameter>
+    </named-stored-procedure-query>
+
+    <sql-result-set-mapping name="memberWithOrderCountResultMap">
+        <entity-result entity-class="oopQueryModel.Member"></entity-result>
+        <column-result name="order_count"></column-result>
+        <column-result name="price_sum"></column-result>
+    </sql-result-set-mapping>
 </entity-mappings>
