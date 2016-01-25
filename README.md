@@ -1,6 +1,9 @@
 # JPA_TEST
 
-JPA 프로그래밍 책을 기반 예제 정리 프로젝트
+JPA 프로그래밍 책을 기반 예제 정리 프로젝트.
+모든 예제는 다음의 환경에 최적화되어있습니다.
+JDK 1.8.0_60
+MariaDB 10.1.8
 
 ## JPA를 공부하면서 느낀점
 1. 객체 - 테이블 매핑이 가능. 개발자는 객체만 보고 프로그래밍이 가능하다.
@@ -11,6 +14,8 @@ JPA 프로그래밍 책을 기반 예제 정리 프로젝트
 4. 이건 SQL 공부에 도움이 된건데, coalesce, all, any, some 의 사용법을 알게되었다.
 5. 상속과 폼되는 객체에 대한 객체와 테이블 설계 매핑되어 테이블 종속적 개발에서 벗어날 수 있다. 이제 클래스 설계할 때 테이블 구조에서 어느정도 자유로워졌다.
 6. 왠지 타이핑 칠게 많아진 것 같다..
+7. IntelliJ에서 static import 단축키 -> ctrl+alt+space, alt+enter -> import statically 선택
+8. find() 는 1차 캐쉬 먼저 조회 후 디비 조회 // JPQL은 디비 먼저 조회후 1차 캐쉬 검사
 
 ### 2015년 11월 8일
 - JPA + MariaDB 를 사용하여 예제 구현
@@ -123,7 +128,7 @@ JPA 프로그래밍 책을 기반 예제 정리 프로젝트
 - create basic Q
 - search condition query
 
-### 2016년 1월 10일
+### 2016년 1월 9일
 
 - 결과 조회
 - paging & ordering
@@ -132,3 +137,15 @@ JPA 프로그래밍 책을 기반 예제 정리 프로젝트
 - sub query
 - projection
 - distinct
+
+### 2016년 1월 10일
+
+[QueryDSL]
+- update, remove batch
+- dynamic query
+- method delegation
+
+[Native SQL]
+- inquiry entity
+- inquiry value
+- inquiry entity + value (SqlResultSetMapping)
