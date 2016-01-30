@@ -16,6 +16,7 @@ MariaDB 10.1.8
 6. 왠지 타이핑 칠게 많아진 것 같다..
 7. IntelliJ에서 static import 단축키 -> ctrl+alt+space, alt+enter -> import statically 선택
 8. find() 는 1차 캐쉬 먼저 조회 후 디비 조회 // JPQL은 디비 먼저 조회후 1차 캐쉬 검사
+9. JNDI를 사용해서 data source를 WAS에 설정할 수 있다.
 
 ### 2015년 11월 8일
 - JPA + MariaDB 를 사용하여 예제 구현
@@ -157,3 +158,11 @@ MariaDB 10.1.8
 - bulk operation -> insert, update, delete
 - persistent context & JPQL -> find() vs JPQL
 - JPQL & flush mode -> FlushModeType.AUTO, FlushModeType.COMMIT
+
+### 2016년 1월 30일
+
+- Spring + JPA 설정
+- Wildfly + JNDI 설정
+- MariaDB 설정
+- logback 설정
+
