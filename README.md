@@ -149,3 +149,11 @@ MariaDB 10.1.8
 - inquiry entity
 - inquiry value
 - inquiry entity + value (SqlResultSetMapping)
+
+### 2016년 1월 25일
+
+- NamedNativeQuery -> basic, annotation, xml
+- StoredProcedureQuery -> basic, annotation, xml
+- bulk operation -> insert, update, delete
+- persistent context & JPQL -> find() vs JPQL
+- JPQL & flush mode -> FlushModeType.AUTO, FlushModeType.COMMIT
