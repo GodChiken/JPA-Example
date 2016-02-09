@@ -166,3 +166,7 @@ MariaDB 10.1.8
 - MariaDB 설정
 - logback 설정
 
+### 2016년 2월 9일
+
+- Enterprise 를 활용한 모델링 진행
+
