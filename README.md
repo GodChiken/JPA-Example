@@ -17,6 +17,8 @@ MariaDB 10.1.8
 7. IntelliJ에서 static import 단축키 -> ctrl+alt+space, alt+enter -> import statically 선택
 8. find() 는 1차 캐쉬 먼저 조회 후 디비 조회 // JPQL은 디비 먼저 조회후 1차 캐쉬 검사
 9. JNDI를 사용해서 data source를 WAS에 설정할 수 있다.
+10. 단위 테스트 작성 시, given/when/then 의 구분을 사용하면 명확하게 단위테스트를 작성할 수 있다.
+11. 도메인 모델 패턴 vs 트랜잭션 스크립트 패턴 의 차이를 배웠다.
 
 ### 2015년 11월 8일
 - JPA + MariaDB 를 사용하여 예제 구현
@@ -170,3 +172,9 @@ MariaDB 10.1.8
 
 - Enterprise 를 활용한 모델링 진행
 
+### 2016년 2월 10일
+
+- hibernate + spring 세팅 수정 (오타를 조심하자) 
+- EA를 사용, 도메인 모델링 완료. 
+- 연관관계 정의 - Repository, Service 구현 
+- 주요 단위 테스트 작성
