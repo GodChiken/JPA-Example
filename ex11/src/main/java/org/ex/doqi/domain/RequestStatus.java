@@ -6,11 +6,6 @@ package org.ex.doqi.domain;
  * @version 1.0
  * @created 09-2-2016 오후 6:06:40
  */
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
 public enum RequestStatus {
-    ORDER,
-    CALCEL
+    ORDER, CALCEL
 }

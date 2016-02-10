@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,5 +27,5 @@ public class Member {
     @Embedded
     private Address address;
     @OneToMany(mappedBy = "member")
-    private List<Request> requests;
+    private List<Request> requests = new ArrayList<>();
 }
