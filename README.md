@@ -19,6 +19,8 @@ MariaDB 10.1.8
 9. JNDI를 사용해서 data source를 WAS에 설정할 수 있다.
 10. 단위 테스트 작성 시, given/when/then 의 구분을 사용하면 명확하게 단위테스트를 작성할 수 있다.
 11. 도메인 모델 패턴 vs 트랜잭션 스크립트 패턴 의 차이를 배웠다.
+12. intellij + wildfly로 sql 파일 실행시킬때 VM option을 줘야한다. (-Dfile.encoding=UTF-8)
+13. 컨트롤러를 떠난 순간? 레이지 패치를 사용할 수 없다. OSIV를 사용해야 한다.
 
 ### 2015년 11월 8일
 - JPA + MariaDB 를 사용하여 예제 구현
@@ -178,3 +180,9 @@ MariaDB 10.1.8
 - EA를 사용, 도메인 모델링 완료. 
 - 연관관계 정의 - Repository, Service 구현 
 - 주요 단위 테스트 작성
+
+### 2016년 2월 11일
+
+- 컨트롤러 구현 중
+- jsp 구현 중
+- import.sql 파일 추가
