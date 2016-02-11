@@ -56,7 +56,7 @@ public class RequestServiceTest extends SpringTest {
 
         Request getRequest = requestRepository.findOne(requestId);
 
-        assertEquals("주문 취소시 상태는 CANCEL이다.", RequestStatus.CALCEL, getRequest.getStatus());
+        assertEquals("주문 취소시 상태는 CANCEL이다.", RequestStatus.CANCEL, getRequest.getStatus());
         assertEquals("주문이 취소된 상품은 그만큼 재고가 증가해야한다. ", 10, product.getStockQuantity());
     }
 

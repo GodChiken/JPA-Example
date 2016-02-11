@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public class ProductRepository {
     @PersistenceContext
-    private EntityManager em;
+    EntityManager em;
 
     public void save(Product product) {
         if (product.getId() == 0) {

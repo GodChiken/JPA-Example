@@ -17,7 +17,7 @@ import javax.persistence.Entity;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@DiscriminatorValue(value = "PD0102")
+@DiscriminatorValue(value = Code.ProductType.ALBUM)
 public class Album extends Product {
 
     private String author;

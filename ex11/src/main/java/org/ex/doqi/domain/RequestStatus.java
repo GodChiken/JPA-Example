@@ -7,5 +7,5 @@ package org.ex.doqi.domain;
  * @created 09-2-2016 오후 6:06:40
  */
 public enum RequestStatus {
-    ORDER, CALCEL
+    ORDER, CANCEL
 }

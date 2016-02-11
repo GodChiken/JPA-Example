@@ -18,7 +18,7 @@ import static org.ex.doqi.domain.QRequest.request;
 @Repository
 public class RequestRepository {
     @PersistenceContext
-    private EntityManager em;
+    EntityManager em;
 
     public void save(Request request) {
         em.persist(request);

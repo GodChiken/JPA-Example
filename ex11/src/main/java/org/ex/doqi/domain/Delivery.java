@@ -21,10 +21,13 @@ public class Delivery {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Embedded
     private Address address;
+
     @Enumerated(EnumType.STRING)
     private DeliveryStatus status;
+
     @OneToOne(mappedBy = "delivery")
     private Request request;
 

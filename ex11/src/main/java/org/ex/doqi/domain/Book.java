@@ -17,10 +17,10 @@ import javax.persistence.Entity;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@DiscriminatorValue(value = "PD0101")
+@DiscriminatorValue(value = Code.ProductType.BOOK)
 public class Book extends Product {
 
     private String artist;
-    private int etc;
+    private String etc;
 
 }

@@ -4,6 +4,7 @@ package org.ex.doqi.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@ToString(exclude = "requestProducts")
 public class Request {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,14 +32,18 @@ public class Request {
 
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private LocalDate orderDate;
+
     @Enumerated(EnumType.STRING)
     private RequestStatus status;
+
     @OneToMany(mappedBy = "request", cascade = CascadeType.ALL)
     private List<RequestedProduct> requestProducts = new ArrayList<>();
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "member_id")
     private Member member;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 
@@ -74,7 +80,7 @@ public class Request {
             throw new RuntimeException("이미 배송된 상품은 취소가 불가능합니다.");
         }
 
-        this.setStatus(RequestStatus.CALCEL);
+        this.setStatus(RequestStatus.CANCEL);
         requestProducts.stream().forEach(RequestedProduct::cancel);
     }
 

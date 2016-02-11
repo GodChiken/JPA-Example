@@ -17,7 +17,7 @@ import javax.persistence.Entity;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@DiscriminatorValue(value = "PD0103")
+@DiscriminatorValue(value = Code.ProductType.MOVIE)
 public class Movie extends Product {
 
     private String director;
