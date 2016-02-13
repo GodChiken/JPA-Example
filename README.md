@@ -21,6 +21,7 @@ MariaDB 10.1.8
 11. 도메인 모델 패턴 vs 트랜잭션 스크립트 패턴 의 차이를 배웠다.
 12. intellij + wildfly로 sql 파일 실행시킬때 VM option을 줘야한다. (-Dfile.encoding=UTF-8)
 13. 컨트롤러를 떠난 순간? 레이지 패치를 사용할 수 없다. OSIV를 사용해야 한다.
+14. 블로그 10번 보는 것보다 레퍼런스 1번보는게 낫다. Logback 설정하면서 느낀점.
 
 ### 2015년 11월 8일
 - JPA + MariaDB 를 사용하여 예제 구현
@@ -186,3 +187,19 @@ MariaDB 10.1.8
 - 컨트롤러 구현 중
 - jsp 구현 중
 - import.sql 파일 추가
+
+### 2016년 2월 13일
+
+- wildfly9 cli 를 이용한 jsp hot deploy 설정
+- 주문 리스트 검색, 주문하기 기능 구현
+- Logback 설정(STDOUT, FILE)
+- Spring data JPA 설정
+- 메소드 이름으로 쿼리 생성
+- JPA namedQuery
+- @Query, 리포지토리 메소드에 쿼리 정의
+- 파라미터 바인딩
+- 벌크성 수정 쿼리
+- 반환 타입
+- 페이징과 정렬
+- 힌트
+- 락
