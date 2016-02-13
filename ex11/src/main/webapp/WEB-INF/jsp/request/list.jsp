@@ -4,6 +4,15 @@
 <html>
 <head></head>
 <body>
+<form action="${pageContext.servletContext.contextPath}/request/list" method="get">
+    <input type="text" name="memberName">
+    <select name="requestStatus">
+        <option value="">전체</option>
+        <option value="ORDER">주문23</option>
+        <option value="CANCEL">취소</option>
+    </select>
+    <input type="submit">
+</form>
 <table>
     <thead>
     <tr>
@@ -30,10 +39,5 @@
     </c:forEach>
     </tbody>
 </table>
-<script>
-    var edit = function(productId){
-        document.location.href = "${pageContext.servletContext.contextPath}/product/"+productId+"/edit";
-    }
-</script>
 </body>
 </html>

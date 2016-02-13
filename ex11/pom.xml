@@ -116,6 +116,8 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
                     <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+                    <webappDirectory>${project.build.directory}/exploded/${project.build.finalName}.war
+                    </webappDirectory>
                 </configuration>
             </plugin>
 

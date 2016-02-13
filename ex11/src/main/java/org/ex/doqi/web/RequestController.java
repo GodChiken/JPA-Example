@@ -40,7 +40,7 @@ public class RequestController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String request(@RequestParam("memberId") long memberId, @RequestParam("product") long productId, @RequestParam("count") int count){
+    public String request(@RequestParam("memberId") long memberId, @RequestParam("productId") long productId, @RequestParam("count") int count) {
         requestService.order(memberId, productId, count);
         return "redirect:/request";
     }
@@ -48,6 +48,7 @@ public class RequestController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(@ModelAttribute("requestSearch") RequestSearch requestSearch, Model model){
         model.addAttribute("requestList", requestService.findRequests(requestSearch));
+        System.out.println("123");
         return "request/list";
     }
 }
